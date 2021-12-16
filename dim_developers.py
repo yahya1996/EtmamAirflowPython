@@ -21,10 +21,6 @@ db = mysql.connect(
 
 cursor = db.cursor()
 
-sql = "INSERT INTO dim_developers (user_id, full_name) VALUES (%s, %s)"
-val = (1, "test")
-cursor.execute(sql, val)
-db.commit()
 
 
 def check_url_validity():
@@ -45,18 +41,17 @@ def save_dim_developers(data):
         registrar_type = dim_dev['registrar_type']
         role = dim_dev['role']
         uid = dim_dev['uid']
-        pg_insert = """ INSERT INTO dim_developers (user_id, national_id, full_name,email,phone,role)
-                                               VALUES (%s,%s,%s,%s,%s,%s,%s)
-                                           """
-        inserted_values = (uid, national_id, full_name, email,phone,role)
-        cursor.execute(pg_insert, inserted_values)
-        connection.commit()
+        sql = "INSERT INTO dim_developers (user_id, national_id, full_name,email,phone,role)  VALUES (%s,%s,%s,%s,%s,%s,%s)"
+        val = (1, "test")
+        cursor.execute(uid, national_id, full_name, email,phone,role)
+        db.commit()
 
 def sync_dim_developers():
     data = get_dim_developers()
+
     #save_dim_developers(data)
 
-    #print(json.dumps(data, indent=4, sort_keys=True))
+    print(json.dumps(data, indent=4, sort_keys=True))
 
     #save_dim_developers(data)
 
