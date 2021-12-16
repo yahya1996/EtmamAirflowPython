@@ -53,10 +53,7 @@ def sync_dim_developers(today,dt_string):
     print("___today___")
     print(today)
     print("date and time =", dt_string)
-    status  = save_dim_developers(data,today,dt_string)
-    print(json.dumps(data, indent=4, sort_keys=True))
-    print(status)
-
+    save_dim_developers(data,today,dt_string)
 
 
 
