@@ -46,8 +46,11 @@ def save_dim_developers(data):
         cursor.execute(uid, national_id, full_name, email,phone,role)
         db.commit()
 
-def sync_dim_developers():
+def sync_dim_developers(today):
     data = get_dim_developers()
+    print("___today___")
+    print(today)
+
 
     #save_dim_developers(data)
 
@@ -56,8 +59,9 @@ def sync_dim_developers():
     #save_dim_developers(data)
 
 def main():
+    today = date.today()
     if check_url_validity() == True:
-        sync_dim_developers()
+        sync_dim_developers(today)
 
 
 if __name__ == "__main__":
