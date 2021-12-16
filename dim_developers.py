@@ -63,8 +63,7 @@ def sync_dim_developers(today,dt_string):
 def main():
     today = date.today()
     now = datetime.now()
-    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-    today = today.strftime("%d/%m/%Y")
+    dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
 
     if check_url_validity() == True:
         sync_dim_developers(today,dt_string)
