@@ -32,7 +32,7 @@ def get_dim_developers():
     data = requests.get(url)
     return data.json()
 
-def save_dim_developers(data):
+def save_dim_developers(data,today,dt_string):
     for dim_dev in data:
         email = dim_dev['email']
         full_name = dim_dev['full_name']
@@ -41,24 +41,23 @@ def save_dim_developers(data):
         registrar_type = dim_dev['registrar_type']
         role = dim_dev['role']
         uid = dim_dev['uid']
-        sql = "INSERT INTO dim_developers (user_id, national_id, full_name,email,phone,role)  VALUES (%s,%s,%s,%s,%s,%s,%s)"
-        val = (1, "test")
-        cursor.execute(uid, national_id, full_name, email,phone,role)
+        sql = "INSERT INTO dim_developers (user_id, national_id, full_name,email,phone,role,registrar_type,refresh_date,refresh_datetime)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        val = (uid, national_id, full_name, email,phone,role,registrar_type,today,dt_string)
+        cursor.execute(sql, val)
         db.commit()
-
+        return "__________Done____________"
+        
 def sync_dim_developers(today,dt_string):
     data = get_dim_developers()
     print("___today___")
     print(today)
     print("date and time =", dt_string)
-
-
-
-    #save_dim_developers(data)
-
+    status  = save_dim_developers(data,today,dt_string)
     print(json.dumps(data, indent=4, sort_keys=True))
+    print(status)
 
-    #save_dim_developers(data)
+
+
 
 def main():
     today = date.today()
