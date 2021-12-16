@@ -41,11 +41,12 @@ def save_dim_developers(data,today,dt_string):
         registrar_type = dim_dev['registrar_type']
         role = dim_dev['role']
         uid = dim_dev['uid']
+        print("______UID______")
+        print(uid)
         sql = "INSERT INTO dim_developers (user_id, national_id, full_name,email,phone,role,type,refresh_date,refresh_datetime)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         val = (uid, national_id, full_name, email,phone,role,registrar_type,today,dt_string)
         cursor.execute(sql, val)
         db.commit()
-        return "__________Done____________"
 
 def sync_dim_developers(today,dt_string):
     data = get_dim_developers()
