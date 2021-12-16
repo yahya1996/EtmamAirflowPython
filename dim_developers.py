@@ -48,6 +48,12 @@ def save_dim_developers(data):
         registrar_type = dim_dev['registrar_type']
         role = dim_dev['role']
         uid = dim_dev['uid']
+        pg_insert = """ INSERT INTO dim_developers (user_id, national_id, full_name,email,phone,role)
+                                               VALUES (%s,%s,%s,%s,%s,%s,%s)
+                                           """
+        inserted_values = (uid, national_id, full_name, email,phone,role)
+        cursor.execute(pg_insert, inserted_values)
+        connection.commit()
 
 def sync_dim_developers():
     data = get_dim_developers()
