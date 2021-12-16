@@ -8,7 +8,6 @@ from datetime import datetime,date, timedelta
 import json
 import urllib
 import mysql.connector as mysql
-
 # from datetime import datetime, time ,timedelta
 url = 'https://etmam-services.housing.gov.sa/user/dim-developers'
 
