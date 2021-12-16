@@ -20,14 +20,11 @@ db = mysql.connect(
 )
 
 cursor = db.cursor()
-## executing the statement using 'execute()' method
-cursor.execute("SHOW DATABASES")
 
-## 'fetchall()' method fetches all the rows from the last executed statement
-databases = cursor.fetchall() ## it returns a list of all databases present
-
-## printing the list of databases
-print(databases)
+sql = "INSERT INTO dim_developers (user_id, full_name) VALUES (%s, %s)"
+val = (1, "test")
+cursor.execute(sql, val)
+db.commit()
 
 
 def check_url_validity():
@@ -57,7 +54,7 @@ def save_dim_developers(data):
 
 def sync_dim_developers():
     data = get_dim_developers()
-    save_dim_developers(data)
+    #save_dim_developers(data)
 
     #print(json.dumps(data, indent=4, sort_keys=True))
 
