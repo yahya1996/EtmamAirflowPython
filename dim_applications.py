@@ -49,7 +49,7 @@ def save_dim_applications(data,today,dt_string):
         create_date = dim_applications['create_date']
         state = dim_applications['state']
         days = dim_applications['days']
-        post_date = datetime.datetime.strptime(create_date, '%d-%m-%Y').strftime('%m/%d/%y')
+        post_date = date.strptime(create_date, '%d-%m-%Y').strftime('%m/%d/%y')
 
         #units = dim_applications['units'] use Units After Malik Solve it
 
