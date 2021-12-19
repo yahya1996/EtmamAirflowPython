@@ -49,13 +49,12 @@ def save_dim_applications(data,today,dt_string):
         create_date = dim_applications['create_date']
         state = dim_applications['state']
         days = dim_applications['days']
-        post_date = datetime.strptime(create_date,'%Y-%m-%d')
-
+        #post_date = date.strptime(create_date,'%Y-%m-%d')
         #units = dim_applications['units'] use Units After Malik Solve it
 
 
         sql = "INSERT INTO dim_applications (application_id, application_number, service_name,company_name,project_title,land_area_m2,project_type,region,city,branch,developer_id,post_date,duration_days,approve_reject_flag,refresh_date,refresh_datetime)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-        val = (application_id, nid,service_type, company_name, project_name,area_m2,project_type,region,city,branch,user_id,post_date,days,state,today,dt_string)
+        val = (application_id, nid,service_type, company_name, project_name,area_m2,project_type,region,city,branch,user_id,create_date,days,state,today,dt_string)
         cursor.execute(sql, val)
         db.commit()
 
