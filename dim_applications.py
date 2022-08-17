@@ -8,15 +8,15 @@ from datetime import datetime,date, timedelta
 import json
 import urllib
 import mysql.connector as mysql
-# from datetime import datetime, time ,timedelta
-url = 'https://etmam-services.housing.gov.sa/user/dim-applications'
+#from datetime import datetime, time ,timedelta
+url = 'https://etmam-services.housing.gov.sa/user/dim-applications?date=all'
 
 db = mysql.connect(
   host="localhost",
-  user="newuser",
-  password="password",
+  user="root",
+  password="Gtj#pC*QDwx[8rNt",
   port = 3306,
-  database='etmam_dw'
+  database='etmam_dw_db' #DB Name
 )
 
 cursor = db.cursor()
@@ -49,12 +49,15 @@ def save_dim_applications(data,today,dt_string):
         create_date = dim_applications['create_date']
         state = dim_applications['state']
         days = dim_applications['days']
+        current_comment = dim_applications['current_comment']
+        is_overdue_incomplete = dim_applications['is_overdue_incomplete']
+        print("----create_date----")
+        print(create_date)
+
         #post_date = date.strptime(create_date,'%Y-%m-%d')
         #units = dim_applications['units'] use Units After Malik Solve it
-
-
-        sql = "INSERT INTO dim_applications (application_id, application_number, service_name,company_name,project_title,land_area_m2,project_type,region,city,branch,developer_id,post_date,duration_days,approve_reject_flag,refresh_date,refresh_datetime)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-        val = (application_id, nid,service_type, company_name, project_name,area_m2,project_type,region,city,branch,user_id,create_date,days,state,today,dt_string)
+        sql = "INSERT INTO dim_applications (application_id, application_number, service_name,company_name,project_title,land_area_m2,project_type,region,city,branch,developer_id,post_date,duration_days,approve_reject_flag,is_overdue_incomplete,current_comment)  VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        val = (application_id, nid,service_type, company_name, project_name,area_m2,project_type,region,city,branch,user_id,create_date,days,state,is_overdue_incomplete,current_comment)
         cursor.execute(sql, val)
         db.commit()
 

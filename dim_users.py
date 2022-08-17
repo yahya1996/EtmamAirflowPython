@@ -13,10 +13,10 @@ url = 'https://etmam-services.housing.gov.sa/user/dim-users'
 
 db = mysql.connect(
   host="localhost",
-  user="newuser",
-  password="password",
+  user="",
+  password="",
   port = 3306,
-  database='etmam_dw'
+  database='' #DB Name
 )
 
 cursor = db.cursor()
